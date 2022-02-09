@@ -25,4 +25,7 @@ export class Employee {
 
     @Column()
     EmployedDate: string;
+
+    @Column()
+    Password: string;
 }
