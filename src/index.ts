@@ -1,14 +1,16 @@
 import express from 'express';
+import employeeRouter from "./routes/employee.routes";
+
 const app = express();
 const port = 8080; // default port to listen
 
-// define a route handler for the default home page
-app.get( "/", ( req, res ) => {
-    res.send( "Hello user!" );
-} );
+app.use(express.json())
+
+app.use('/api/employee', employeeRouter)
 
 // start the Express server
-app.listen( port, () => {
+app.listen(port, () => {
     // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${ port }` );
-} );
+    console.log(`server started at http://localhost:${port}`);
+});
+
