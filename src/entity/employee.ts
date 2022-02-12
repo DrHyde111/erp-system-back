@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
+import {Attendance} from "./attendance";
 
 @Entity()
 export class Employee {
@@ -28,4 +29,7 @@ export class Employee {
 
     @Column()
     Password: string;
+
+    @OneToMany(()=>Attendance, attendance=>attendance.Employee)
+    Attendances: Attendance[];
 }
