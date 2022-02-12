@@ -25,4 +25,7 @@ employeeRouter.delete("/:employeeId", employeeController.deleteById)
 // Create attendance for user or log employee out of work if not closed attendance exist
 employeeRouter.put("/:employeeId/attendance", attendanceController.attendanceControl)
 
+// Get all employee attendances
+employeeRouter.get("/:employeeId/attendance", attendanceController.getAllByEmployeeId)
+
 export default employeeRouter;
