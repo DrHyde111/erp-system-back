@@ -1,6 +1,7 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable} from 'typeorm';
 import {Attendance} from "./attendance";
 import {Remarks} from "./remarks";
+import {Warehouse} from "./warehouse";
 
 @Entity()
 export class Employee {
@@ -36,4 +37,8 @@ export class Employee {
 
     @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator)
     CreatedRemarks: Remarks[];
+
+    @ManyToMany(()=>Warehouse)
+    @JoinTable()
+    Oversees: Warehouse[]
 }
