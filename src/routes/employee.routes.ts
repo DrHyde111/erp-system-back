@@ -5,23 +5,20 @@ const employeeRouter = Router()
 
 // Create new employee
 employeeRouter.post("/create", employeeController.create)
-//
-// // Find employee by id
-// employeeRouter.get("/:id", employeeController.getById)
-//
-// // Find employee by email
-// employeeRouter.post("/", employeeController.getByEmail)
-//
-// // Find all employees
-// employeeRouter.get("/", employeeController.getAll)
-//
-// // Update employee by id
-// employeeRouter.post("/:id", employeeController.update)
-//
-// // Delete employee by id
-// employeeRouter.delete("/:id", employeeController.delete)
-//
-// // Delete employee by id
-// employeeRouter.post("/delete-employees", employeeController.deleteMultiple)
+
+// Find employee by id
+employeeRouter.get("/:employeeId", employeeController.getById)
+
+// Find employee by email
+employeeRouter.post("/", employeeController.getByEmail)
+
+// Find all employees
+employeeRouter.get("/", employeeController.getAll)
+
+// Update employee by id
+employeeRouter.post("/:employeeId", employeeController.update)
+
+// Delete employee by id
+employeeRouter.delete("/:employeeId", employeeController.deleteById)
 
 export default employeeRouter;

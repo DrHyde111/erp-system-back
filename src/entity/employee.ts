@@ -5,7 +5,7 @@ export class Employee {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique: true})
     Email: string;
 
     @Column()
