@@ -13,10 +13,10 @@ export class Remarks {
     @Column({nullable: true})
     TimeOut: string;
 
-    @ManyToOne(() => Employee, employee => employee.CreatedRemarks,{eager: true})
-    Creator: Employee;
+    @ManyToOne(() => Employee, employee => employee.CreatedRemarks)
+    Creator: Promise<Employee>;
 
-    @ManyToOne(() => Attendance, attendance => attendance.Remarks,{eager: true})
-    Attendance: Attendance;
+    @ManyToOne(() => Attendance, attendance => attendance.Remarks)
+    Attendance: Promise<Attendance>;
 
 }

@@ -28,4 +28,8 @@ employeeRouter.put("/:employeeId/attendance", attendanceController.attendanceCon
 // Get all employee attendances
 employeeRouter.get("/:employeeId/attendance", attendanceController.getAllByEmployeeId)
 
+// Get specific employee's attendance
+employeeRouter.get("/:employeeId/attendance/:attendanceId", attendanceController.getEmployeeSpecificAttendance)
+
+
 export default employeeRouter;

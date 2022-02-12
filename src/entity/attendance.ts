@@ -16,6 +16,6 @@ export class Attendance {
     @ManyToOne(() => Employee, employee => employee.Attendances,{eager: true})
     Employee: Employee;
 
-    @ManyToOne(() => Remarks, remarks => remarks.Attendance,{eager: true})
-    Remarks: Remarks
+    @OneToMany(() => Remarks, remarks => remarks.Attendance)
+    Remarks: Promise<Remarks[]>
 }

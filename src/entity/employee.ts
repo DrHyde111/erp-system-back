@@ -32,7 +32,7 @@ export class Employee {
     Password: string;
 
     @OneToMany(() => Attendance, attendance => attendance.Employee)
-    Attendances: Attendance[];
+    Attendances: Promise<Attendance[]>;
 
     @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator)
     CreatedRemarks: Remarks[];

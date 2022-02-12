@@ -60,7 +60,24 @@ async function getAllByEmployeeId(req: Request, res: Response) {
     }
 }
 
-async function getAll(req: Request, res: Response){
+async function getEmployeeSpecificAttendance(req: Request, res: Response) {
+    try {
+        if (req.params.employeeId === undefined) {
+            return res.status(403).send({message: "Employee id is required"})
+        }
+        const connection = await getConnection()
+        const attendanceRepository = connection.getRepository(Attendance)
+        const employeeRepository = connection.getRepository(Employee)
+        const employee = await employeeRepository.findOne({id: parseInt(req.params.employeeId, 10)})
+        const result = await attendanceRepository.find({Employee: employee, id: parseInt(req.params.attendanceId, 10)})
+        return res.status(200).send(result)
+    } catch (error) {
+        return res.status(500).send({message: "Error"});
+    }
+}
+
+
+async function getAll(req: Request, res: Response) {
     try {
         const connection = await getConnection()
         const attendanceRepository = connection.getRepository(Attendance)
@@ -74,6 +91,7 @@ async function getAll(req: Request, res: Response){
 const attendanceController = {
     attendanceControl,
     getAllByEmployeeId,
+    getEmployeeSpecificAttendance,
     getAll
 }
 
