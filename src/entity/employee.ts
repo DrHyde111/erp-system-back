@@ -1,5 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
 import {Attendance} from "./attendance";
+import {Remarks} from "./remarks";
 
 @Entity()
 export class Employee {
@@ -30,6 +31,9 @@ export class Employee {
     @Column()
     Password: string;
 
-    @OneToMany(()=>Attendance, attendance=>attendance.Employee)
+    @OneToMany(() => Attendance, attendance => attendance.Employee)
     Attendances: Attendance[];
+
+    @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator)
+    CreatedRemarks: Remarks[];
 }

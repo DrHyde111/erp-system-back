@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm';
 import {Employee} from "./employee";
+import {Remarks} from "./remarks";
 
 @Entity()
 export class Attendance {
@@ -14,4 +15,7 @@ export class Attendance {
 
     @ManyToOne(() => Employee, employee => employee.Attendances,{eager: true})
     Employee: Employee;
+
+    @ManyToOne(() => Remarks, remarks => remarks.Attendance,{eager: true})
+    Remarks: Remarks
 }
