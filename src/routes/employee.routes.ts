@@ -35,5 +35,17 @@ employeeRouter.get("/:employeeId/attendance/:attendanceId", attendanceController
 // Create remark to specific employee's attendance
 employeeRouter.post("/:employeeId/attendance/:attendanceId/remarks", remarkController.create)
 
+// Create remark to specific employee's attendance
+employeeRouter.get("/:employeeId/attendance/:attendanceId/remarks/:remarkId", remarkController.getById)
+
+// Get all remarks for specific attendance
+employeeRouter.get("/:employeeId/attendance/:attendanceId/remarks", remarkController.getAllByAttendanceId)
+
+// Update specific remark
+employeeRouter.post("/:employeeId/attendance/:attendanceId/remarks/:remarkId", remarkController.update)
+
+// Delete specific remark
+employeeRouter.delete("/:employeeId/attendance/:attendanceId/remarks/:remarkId", remarkController.deleteById)
+
 
 export default employeeRouter;
