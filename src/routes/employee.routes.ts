@@ -1,6 +1,7 @@
 import {Router} from "express";
 import employeeController from "../controllers/employee.controller";
 import attendanceController from "../controllers/attendance.controller";
+import remarkController from "../controllers/remark.controller";
 
 const employeeRouter = Router()
 
@@ -30,6 +31,9 @@ employeeRouter.get("/:employeeId/attendance", attendanceController.getAllByEmplo
 
 // Get specific employee's attendance
 employeeRouter.get("/:employeeId/attendance/:attendanceId", attendanceController.getEmployeeSpecificAttendance)
+
+// Create remark to specific employee's attendance
+employeeRouter.post("/:employeeId/attendance/:attendanceId/remarks", remarkController.create)
 
 
 export default employeeRouter;
