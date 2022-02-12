@@ -1,5 +1,6 @@
 import {Router} from "express";
 import employeeController from "../controllers/employee.controller";
+import attendanceController from "../controllers/attendance.controller";
 
 const employeeRouter = Router()
 
@@ -20,5 +21,8 @@ employeeRouter.post("/:employeeId", employeeController.update)
 
 // Delete employee by id
 employeeRouter.delete("/:employeeId", employeeController.deleteById)
+
+// Create attendance for user or log employee out of work if not closed attendance exist
+employeeRouter.put("/:employeeId/attendance", attendanceController.attendanceControl)
 
 export default employeeRouter;

@@ -6,10 +6,10 @@ export class Attendance {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({unique: true})
+    @Column()
     TimeIn: string;
 
-    @Column()
+    @Column({nullable: true})
     TimeOut: string;
 
     @ManyToOne(() => Employee, employee => employee.Attendances)
