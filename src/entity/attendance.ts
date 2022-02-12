@@ -12,6 +12,6 @@ export class Attendance {
     @Column({nullable: true})
     TimeOut: string;
 
-    @ManyToOne(() => Employee, employee => employee.Attendances)
+    @ManyToOne(() => Employee, employee => employee.Attendances,{eager: true})
     Employee: Employee;
 }

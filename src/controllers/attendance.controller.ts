@@ -60,9 +60,21 @@ async function getAllByEmployeeId(req: Request, res: Response) {
     }
 }
 
+async function getAll(req: Request, res: Response){
+    try {
+        const connection = await getConnection()
+        const attendanceRepository = connection.getRepository(Attendance)
+        const result = await attendanceRepository.find()
+        return res.status(200).send(result)
+    } catch (error) {
+        return res.status(500).send({message: "Error"});
+    }
+}
+
 const attendanceController = {
     attendanceControl,
-    getAllByEmployeeId
+    getAllByEmployeeId,
+    getAll
 }
 
 export default attendanceController;
