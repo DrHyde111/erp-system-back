@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {Warehouse} from "./warehouse";
 
 @Entity()
 export class Product {
@@ -19,4 +20,7 @@ export class Product {
 
     @Column()
     PricePerUnit: number
+
+    @ManyToOne(() => Warehouse, warehouse => warehouse.Has,{eager: true})
+    Warehouse: Warehouse;
 }

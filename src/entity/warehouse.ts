@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany} from 'typeorm';
 import {Product} from "./product";
 import {Employee} from "./employee";
 
@@ -19,7 +19,7 @@ export class Warehouse {
     @Column()
     Description: string
 
-    @ManyToMany(() => Product)
+    @OneToMany(() => Product, product => product.Warehouse)
     @JoinTable()
     Has: Product[]
 
