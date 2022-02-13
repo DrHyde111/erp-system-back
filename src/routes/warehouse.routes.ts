@@ -18,5 +18,7 @@ warehouseRouter.post("/:warehouseId", warehouseController.update)
 // Delete warehouse by id
 warehouseRouter.delete("/:warehouseId", warehouseController.deleteById)
 
+// Assign overseer to warehouse
+warehouseRouter.post("/:warehouseId/overseers/:employeeId/assign", warehouseController.assignOverseer)
 
 export default warehouseRouter;

@@ -38,7 +38,7 @@ export class Employee {
     @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator)
     CreatedRemarks: Remarks[];
 
-    @ManyToMany(()=>Warehouse)
+    @ManyToMany(() => Warehouse, {cascade: true})
     @JoinTable()
     Oversees: Warehouse[]
 }
