@@ -1,6 +1,7 @@
 import {Router} from "express";
 import warehouseController from "../controllers/warehouse.controller";
 import employeeController from "../controllers/employee.controller";
+import productController from "../controllers/product.controller";
 
 const warehouseRouter = Router()
 
@@ -30,5 +31,8 @@ warehouseRouter.get("/:warehouseId/overseers/:employeeId", employeeController.ge
 
 // Unassign employee from overseeing warehouse
 warehouseRouter.delete("/:warehouseId/overseers/:employeeId", warehouseController.unasssignOverseer)
+
+// Add product to warehouse
+warehouseRouter.post("/:warehouseId/products/add", productController.addToWarehouse)
 
 export default warehouseRouter;

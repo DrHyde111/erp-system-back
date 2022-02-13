@@ -20,7 +20,6 @@ export class Warehouse {
     Description: string
 
     @OneToMany(() => Product, product => product.Warehouse)
-    @JoinTable()
     Has: Product[]
 
     @ManyToMany(() => Employee, employee => employee.Oversees, {cascade: true, eager: true})

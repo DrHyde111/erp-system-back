@@ -13,7 +13,7 @@ export class Product {
     Description: string
 
     @Column()
-    Quantity: string
+    Quantity: number
 
     @Column()
     Unit: string
