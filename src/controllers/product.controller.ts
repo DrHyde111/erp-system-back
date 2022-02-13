@@ -33,13 +33,10 @@ async function addToWarehouse(req: Request, res: Response) {
     }
 }
 
-async function removeFromWarehouse(req: Request, res: Response) {
 
-}
 
 const productController = {
     addToWarehouse,
-    removeFromWarehouse
 }
 
 export default productController
