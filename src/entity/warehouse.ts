@@ -1,5 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from 'typeorm';
 import {Product} from "./product";
+import {Employee} from "./employee";
 
 @Entity()
 export class Warehouse {
@@ -22,4 +23,7 @@ export class Warehouse {
     @JoinTable()
     Has: Product[]
 
+    @ManyToMany(() => Employee, {cascade: true, eager: true})
+    @JoinTable()
+    Overseers: Employee[]
 }

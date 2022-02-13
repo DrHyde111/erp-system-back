@@ -81,15 +81,15 @@ async function assignOverseer(req: Request, res: Response) {
         const employeeRepository = connection.getRepository(Employee)
         const warehouseRepository = connection.getRepository(Warehouse)
         const employee = await employeeRepository.findOne({id: parseInt(req.params.employeeId, 10)})
-        if(employee===undefined){
+        if (employee === undefined) {
             return res.status(404).send({message: "Employee not found"})
         }
         const warehouse = await warehouseRepository.findOne({id: parseInt(req.params.warehouseId, 10)})
-        if(warehouse===undefined){
+        if (warehouse === undefined) {
             return res.status(404).send({message: "Warehouse not found"})
         }
-        employee.Oversees = [warehouse]
-        const result = await employeeRepository.save(employee);
+        warehouse.Overseers = [employee]
+        const result = await warehouseRepository.save(warehouse);
         return res.status(200).send(result)
     } catch (error) {
         // tslint:disable-next-line:no-console
@@ -98,13 +98,28 @@ async function assignOverseer(req: Request, res: Response) {
     }
 }
 
+async function getOverseers(req: Request, res: Response) {
+    try {
+        const connection = await getConnection()
+        const warehoseRepository = connection.getRepository(Warehouse)
+        const warehouse = await warehoseRepository.findOne({id: parseInt(req.params.warehouseId, 10)})
+        return res.status(200).send(warehouse.Overseers)
+    } catch (error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
+
 const warehouseController = {
     create,
     getById,
     getAll,
     update,
     deleteById,
-    assignOverseer
+    assignOverseer,
+    getOverseers
 
 }
 
