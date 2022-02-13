@@ -21,6 +21,6 @@ export class Product {
     @Column()
     PricePerUnit: number
 
-    @ManyToOne(() => Warehouse, warehouse => warehouse.Has,{eager: true})
+    @ManyToOne(() => Warehouse, warehouse => warehouse.Products,{eager: true})
     Warehouse: Warehouse;
 }

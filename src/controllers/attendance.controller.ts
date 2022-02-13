@@ -76,7 +76,6 @@ async function getEmployeeSpecificAttendance(req: Request, res: Response) {
     }
 }
 
-
 async function getAll(req: Request, res: Response) {
     try {
         const connection = await getConnection()

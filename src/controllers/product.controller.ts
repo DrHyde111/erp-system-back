@@ -33,10 +33,21 @@ async function addToWarehouse(req: Request, res: Response) {
     }
 }
 
+async function deleteProduct(req: Request, res: Response) {
+    try {
+        const connection = await getConnection();
+        const productRepository = connection.getRepository(Product)
+        const result = await productRepository.delete({id: parseInt(req.params.productId)})
 
+        return res.status(200).send(result)
+    } catch (e) {
+        return res.status(500).send({message: "Error"})
+    }
+}
 
 const productController = {
     addToWarehouse,
+    deleteProduct
 }
 
 export default productController

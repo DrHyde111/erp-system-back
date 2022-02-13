@@ -35,4 +35,7 @@ warehouseRouter.delete("/:warehouseId/overseers/:employeeId", warehouseControlle
 // Add product to warehouse
 warehouseRouter.post("/:warehouseId/products/add", productController.addToWarehouse)
 
+// Delete product
+warehouseRouter.delete("/:warehouseId/products/:productId", productController.deleteProduct)
+
 export default warehouseRouter;
