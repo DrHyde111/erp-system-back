@@ -111,6 +111,26 @@ async function getOverseers(req: Request, res: Response) {
     }
 }
 
+async function unasssignOverseer(req: Request, res: Response) {
+    try {
+        const connection = await getConnection()
+        const warehouseRepository = connection.getRepository(Warehouse)
+        const warehouse = await warehouseRepository.findOne({id: parseInt(req.params.warehouseId, 10)})
+
+        warehouse.Overseers = warehouse.Overseers.filter(overseer => {
+            return overseer.id !== parseInt(req.params.employeeId, 10)
+        })
+
+        const result = await warehouseRepository.save(warehouse);
+
+        return res.status(200).send(result)
+    } catch (error) {
+        // tslint:disable-next-line:no-console
+        console.log(error);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
 
 const warehouseController = {
     create,
@@ -119,7 +139,8 @@ const warehouseController = {
     update,
     deleteById,
     assignOverseer,
-    getOverseers
+    getOverseers,
+    unasssignOverseer
 
 }
 

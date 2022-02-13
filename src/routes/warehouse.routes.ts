@@ -28,4 +28,7 @@ warehouseRouter.get("/:warehouseId/overseers/", warehouseController.getOverseers
 // Retrieve overseer assigned to warehouseby id
 warehouseRouter.get("/:warehouseId/overseers/:employeeId", employeeController.getById)
 
+// Unassign employee from overseeing warehouse
+warehouseRouter.delete("/:warehouseId/overseers/:employeeId", warehouseController.unasssignOverseer)
+
 export default warehouseRouter;

@@ -23,7 +23,7 @@ export class Warehouse {
     @JoinTable()
     Has: Product[]
 
-    @ManyToMany(() => Employee, {cascade: true, eager: true})
+    @ManyToMany(() => Employee, employee => employee.Oversees, {cascade: true, eager: true})
     @JoinTable()
     Overseers: Employee[]
 }

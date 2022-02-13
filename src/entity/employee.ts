@@ -38,5 +38,6 @@ export class Employee {
     @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator)
     CreatedRemarks: Remarks[];
 
-
+    @ManyToMany(() => Warehouse, warehouse => warehouse.Overseers)
+    Oversees: Warehouse[]
 }
