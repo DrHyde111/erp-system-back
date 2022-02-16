@@ -37,7 +37,7 @@ async function deleteProduct(req: Request, res: Response) {
     try {
         const connection = await getConnection();
         const productRepository = connection.getRepository(Product)
-        const result = await productRepository.delete({id: parseInt(req.params.productId)})
+        const result = await productRepository.delete({id: parseInt(req.params.productId, 10)})
 
         return res.status(200).send(result)
     } catch (e) {

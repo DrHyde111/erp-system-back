@@ -1,6 +1,7 @@
 import {Employee} from "../entity/employee";
 import {Request, Response} from "express";
 import {createConnection, getConnection, getRepository} from "typeorm";
+import bcrypt from "bcrypt";
 
 
 async function create(req: Request, res: Response) {
@@ -9,6 +10,7 @@ async function create(req: Request, res: Response) {
         const employeeRepository = connection.getRepository(Employee)
         // tslint:disable-next-line:no-console
         console.log(req.body);
+        req.body.Password = await bcrypt.hash(req.body.Password, 10)
         const employee = employeeRepository.create(req.body);
         const results = await employeeRepository.save(employee);
         return res.status(200).send(results);

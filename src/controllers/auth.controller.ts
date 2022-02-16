@@ -13,12 +13,12 @@ async function login(req: Request, res: Response) {
         if (!employee) {
             return res.status(403).send({message: "Bad credentials"})
         }
-        let isPasswordCorrect = await bcrypt.compare(req.body.password, employee.Password);
+        const isPasswordCorrect = await bcrypt.compare(req.body.password, employee.Password);
         if (!isPasswordCorrect) {
             return res.status(403).send({message: "Bad credentials"})
         }
-        let token = authServices.generateToken(employee);
-        return res.status(200).send({message: "Login succesfull!", token: token});
+        const token = authServices.generateToken(employee);
+        return res.status(200).send({message: "Login succesfull!", token});
     } catch (e) {
         // tslint:disable-next-line:no-console
         console.log(e);
