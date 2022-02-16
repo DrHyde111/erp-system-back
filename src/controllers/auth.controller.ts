@@ -9,11 +9,11 @@ async function login(req: Request, res: Response) {
     try {
         const connection = await getConnection();
         const employeeRepository = connection.getRepository(Employee)
-        const employee = await employeeRepository.findOne({Email: req.body.email})
+        const employee = await employeeRepository.findOne({Email: req.body.Email})
         if (!employee) {
             return res.status(403).send({message: "Bad credentials"})
         }
-        const isPasswordCorrect = await bcrypt.compare(req.body.password, employee.Password);
+        const isPasswordCorrect = await bcrypt.compare(req.body.Password, employee.Password);
         if (!isPasswordCorrect) {
             return res.status(403).send({message: "Bad credentials"})
         }
