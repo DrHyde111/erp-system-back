@@ -70,6 +70,9 @@ async function getAll(req: Request, res: Response) {
 
 async function update(req: Request, res: Response) {
     try {
+        if (req.body.Password != undefined) {
+            req.body.Password = bcrypt.hash(req.body.Password, 10)
+        }
         const connection = await getConnection()
         const employeeRepository = connection.getRepository(Employee)
         const results = await employeeRepository.update({id: parseInt(req.params.employeeId, 10)}, req.body);
