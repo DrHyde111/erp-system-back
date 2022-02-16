@@ -70,7 +70,7 @@ async function getAll(req: Request, res: Response) {
 
 async function update(req: Request, res: Response) {
     try {
-        if (req.body.Password != undefined) {
+        if (req.body.Password !== undefined) {
             req.body.Password = bcrypt.hash(req.body.Password, 10)
         }
         const connection = await getConnection()

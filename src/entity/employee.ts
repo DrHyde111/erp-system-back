@@ -2,6 +2,7 @@ import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable
 import {Attendance} from "./attendance";
 import {Remarks} from "./remarks";
 import {Warehouse} from "./warehouse";
+import {Role} from "./role";
 
 @Entity()
 export class Employee {
@@ -40,4 +41,8 @@ export class Employee {
 
     @ManyToMany(() => Warehouse, warehouse => warehouse.Overseers)
     Oversees: Warehouse[]
+
+    @ManyToMany(() => Role, role => role.Employee, {cascade: true, eager: true})
+    @JoinTable()
+    Roles: Role[]
 }
