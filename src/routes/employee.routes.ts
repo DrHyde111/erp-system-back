@@ -2,6 +2,7 @@ import {Router} from "express";
 import employeeController from "../controllers/employee.controller";
 import attendanceController from "../controllers/attendance.controller";
 import remarkController from "../controllers/remark.controller";
+import roleController from "../controllers/role.controller";
 
 const employeeRouter = Router()
 
@@ -46,6 +47,13 @@ employeeRouter.post("/:employeeId/attendance/:attendanceId/remarks/:remarkId", r
 
 // Delete specific remark
 employeeRouter.delete("/:employeeId/attendance/:attendanceId/remarks/:remarkId", remarkController.deleteById)
+
+// Add role for employee
+employeeRouter.post("/:employeeId/roles/:roleId", roleController.addRole)
+
+// Remove role for employee
+employeeRouter.delete("/:employeeId/roles/:roleId", roleController.removeRole)
+
 
 
 export default employeeRouter;
