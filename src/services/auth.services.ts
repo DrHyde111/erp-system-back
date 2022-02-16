@@ -3,10 +3,11 @@ import jwt from "jsonwebtoken";
 import config from "../config/config";
 
 function generateToken(employee: Employee) {
-    return jwt.sign(employee, config.tokenSecret, {expiresIn: '24h'})
+    const payload = {id: employee.id, Email: employee.Email, Name: employee.Name}
+    return jwt.sign(payload, config.tokenSecret, {expiresIn: '24h'})
 }
 
-const authServices ={
+const authServices = {
     generateToken
 }
 
