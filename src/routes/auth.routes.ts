@@ -6,4 +6,7 @@ const authRouter = Router()
 // Login into system
 authRouter.post("/login", authController.login)
 
+// Check if token is correct
+authRouter.post("/check", authController.checkToken)
+
 export default authRouter;

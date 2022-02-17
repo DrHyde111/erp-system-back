@@ -7,8 +7,18 @@ function generateToken(employee: Employee) {
     return jwt.sign(payload, config.tokenSecret, {expiresIn: '24h'})
 }
 
+function verifyToken(token: string) {
+    try {
+        jwt.verify(token, config.tokenSecret)
+        return true
+    } catch (error) {
+        return false
+    }
+}
+
 const authServices = {
-    generateToken
+    generateToken,
+    verifyToken
 }
 
 export default authServices;

@@ -3,6 +3,7 @@ import {getConnection} from "typeorm";
 import {Employee} from "../entity/employee";
 import bcrypt from "bcrypt";
 import authServices from "../services/auth.services";
+import jwt from "jsonwebtoken";
 
 
 async function login(req: Request, res: Response) {
@@ -26,9 +27,26 @@ async function login(req: Request, res: Response) {
     }
 }
 
+async function checkToken(req: Request, res: Response) {
+    try {
+        const token = req.body.token;
+        if (!token) {
+            return res.status(403).send({message: "Invalid token"})
+        }
+        if (!authServices.verifyToken(token)) {
+            return res.status(403).send({message: "Invalid token"})
+        }
+        return res.status(200).send({message: "Correct token"})
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        return res.status(500).send({message: "Error"})
+    }
+}
+
 
 const authController = {
     login,
+    checkToken
 }
 
 export default authController;
