@@ -19,7 +19,11 @@ async function login(req: Request, res: Response) {
             return res.status(403).send({message: "Bad credentials"})
         }
         const token = authServices.generateToken(employee);
-        return res.status(200).send({message: "Login succesfull!", token});
+        const employeeInfo = {
+            id: employee.id,
+            name: employee.Name,
+        }
+        return res.status(200).send({message: "Login succesfull!", token, employeeInfo});
     } catch (e) {
         // tslint:disable-next-line:no-console
         console.log(e);
