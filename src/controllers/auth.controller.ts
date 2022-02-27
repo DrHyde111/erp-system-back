@@ -37,10 +37,11 @@ async function checkToken(req: Request, res: Response) {
         if (!token) {
             return res.status(403).send({message: "Invalid token"})
         }
+        const employeeInfo = authServices.verifyToken(token);
         if (!authServices.verifyToken(token)) {
             return res.status(403).send({message: "Invalid token"})
         }
-        return res.status(200).send({message: "Correct token"})
+        return res.status(200).send({message: "Correct token", employeeInfo})
     } catch (e) {
         // tslint:disable-next-line:no-console
         return res.status(500).send({message: "Error"})

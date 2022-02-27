@@ -9,8 +9,8 @@ function generateToken(employee: Employee) {
 
 function verifyToken(token: string) {
     try {
-        jwt.verify(token, config.tokenSecret)
-        return true
+        const decrypted = jwt.verify(token, config.tokenSecret)
+        return decrypted
     } catch (error) {
         return false
     }
