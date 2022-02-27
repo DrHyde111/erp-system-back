@@ -33,6 +33,9 @@ employeeRouter.get("/:employeeId/attendance", attendanceController.getAllByEmplo
 // Get specific employee's attendance
 employeeRouter.get("/:employeeId/attendance/:attendanceId", attendanceController.getEmployeeSpecificAttendance)
 
+// Get latest employee's attendance
+employeeRouter.get("/:employeeId/attendance/latest", attendanceController.getLatest)
+
 // Create remark to specific employee's attendance
 employeeRouter.post("/:employeeId/attendance/:attendanceId/remarks", remarkController.create)
 

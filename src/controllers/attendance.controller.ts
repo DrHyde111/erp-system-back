@@ -87,11 +87,40 @@ async function getAll(req: Request, res: Response) {
     }
 }
 
+async function getLatest(req: Request, res: Response) {
+    try {
+        const connection = await getConnection();
+        const attendanceRepository = connection.getRepository(Attendance);
+        const employeeRepository = connection.getRepository(Employee)
+        const employee = await employeeRepository.findOne({id: parseInt(req.params.employeeId, 10)})
+
+        if (employee === undefined) {
+            return res.status(404).send({message: "Emploee doesnt exist"})
+        }
+
+        const lastAttendance = await attendanceRepository.findOne(
+            {
+                where: {Employee: parseInt(req.params.employeeId, 10)},
+                order: {id: 'DESC'}
+            }
+        );
+        if (lastAttendance === undefined) {
+            return res.status(404).send({message: "Not found"})
+        }
+        return res.status(200).send({attendance: lastAttendance});
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
 const attendanceController = {
     attendanceControl,
     getAllByEmployeeId,
     getEmployeeSpecificAttendance,
-    getAll
+    getAll,
+    getLatest
 }
 
 export default attendanceController;
