@@ -104,10 +104,7 @@ async function getLatest(req: Request, res: Response) {
                 order: {id: 'DESC'}
             }
         );
-        if (lastAttendance === undefined) {
-            return res.status(404).send({message: "Not found"})
-        }
-        return res.status(200).send({attendance: lastAttendance});
+        return res.status(200).send(lastAttendance)
     } catch (e) {
         // tslint:disable-next-line:no-console
         console.log(e);

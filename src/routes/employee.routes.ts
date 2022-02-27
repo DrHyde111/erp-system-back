@@ -30,11 +30,11 @@ employeeRouter.put("/:employeeId/attendance", attendanceController.attendanceCon
 // Get all employee attendances
 employeeRouter.get("/:employeeId/attendance", attendanceController.getAllByEmployeeId)
 
-// Get specific employee's attendance
-employeeRouter.get("/:employeeId/attendance/:attendanceId", attendanceController.getEmployeeSpecificAttendance)
-
 // Get latest employee's attendance
 employeeRouter.get("/:employeeId/attendance/latest", attendanceController.getLatest)
+
+// Get specific employee's attendance
+employeeRouter.get("/:employeeId/attendance/:attendanceId", attendanceController.getEmployeeSpecificAttendance)
 
 // Create remark to specific employee's attendance
 employeeRouter.post("/:employeeId/attendance/:attendanceId/remarks", remarkController.create)
