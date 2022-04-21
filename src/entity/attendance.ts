@@ -13,7 +13,7 @@ export class Attendance {
     @Column({nullable: true})
     TimeOut: string;
 
-    @ManyToOne(() => Employee, employee => employee.Attendances,{eager: true})
+    @ManyToOne(() => Employee, employee => employee.Attendances,{eager: true,onDelete: "CASCADE"})
     Employee: Employee;
 
     @OneToMany(() => Remarks, remarks => remarks.Attendance)

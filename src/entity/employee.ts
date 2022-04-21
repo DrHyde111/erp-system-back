@@ -33,10 +33,10 @@ export class Employee {
     @Column()
     Password: string;
 
-    @OneToMany(() => Attendance, attendance => attendance.Employee)
+    @OneToMany(() => Attendance, attendance => attendance.Employee, {cascade: true, onDelete: "CASCADE"})
     Attendances: Promise<Attendance[]>;
 
-    @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator)
+    @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator, {cascade: true, onDelete: "CASCADE"})
     CreatedRemarks: Remarks[];
 
     @ManyToMany(() => Warehouse, warehouse => warehouse.Overseers)
