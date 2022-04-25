@@ -8,6 +8,9 @@ export class Remarks {
     id: number;
 
     @Column()
+    Title: string;
+
+    @Column()
     Content: string;
 
     @Column()
