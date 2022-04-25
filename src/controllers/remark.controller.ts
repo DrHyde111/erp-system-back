@@ -26,7 +26,7 @@ async function create(req: Request, res: Response) {
 
         const result = await remarkRepository.save(remark);
 
-        return res.status(200).send(result);
+        return res.status(200).send({message: "Remark created", remark: result});
     } catch (e) {
         // tslint:disable-next-line:no-console
         console.log(e);
