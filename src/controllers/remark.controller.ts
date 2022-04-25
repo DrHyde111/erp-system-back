@@ -14,9 +14,14 @@ async function create(req: Request, res: Response) {
         const remark = remarkRepository.create();
 
         remark.Attendance = await attendanceRepository.findOne({id: parseInt(req.params.attendanceId, 10)})
-        remark.Creator = await employeeRepository.findOne({id: parseInt(req.params.employeeId, 10)})
+        remark.Creator = await employeeRepository.findOne({id: parseInt(req.body.creatorId, 10)})
         remark.CreationDate = dateServices.formatDate(new Date())
         remark.Content = req.body.Content;
+
+        if(remark.Creator == null){
+            return res.status(404).send({message:"Employee not found"})
+
+        }
 
         const result = await remarkRepository.save(remark);
 

@@ -13,7 +13,7 @@ export class Remarks {
     @Column()
     CreationDate: string;
 
-    @ManyToOne(() => Employee, employee => employee.CreatedRemarks, {onDelete: "CASCADE"})
+    @ManyToOne(() => Employee, employee => employee.CreatedRemarks, {eager: true, onDelete: "CASCADE"})
     Creator: Employee;
 
     @ManyToOne(() => Attendance, attendance => attendance.Remarks)
