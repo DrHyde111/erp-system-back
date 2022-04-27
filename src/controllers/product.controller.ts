@@ -70,11 +70,38 @@ async function getProducts(req: Request, res: Response) {
     }
 }
 
+async function getProduct(req: Request, res: Response) {
+    try {
+        const connection = await getConnection();
+        const productRepository = connection.getRepository(Product)
+        const warehouseRepository = connection.getRepository(Warehouse)
+
+        const warehouse = await warehouseRepository.findOne({id: parseInt(req.params.warehouseId, 10)})
+
+        if (warehouse === undefined) {
+            return res.status(404).send({message: "Warehouse doesnt exist"})
+        }
+
+        const result = await productRepository.findOne({id: parseInt(req.params.productId, 10)})
+
+        if (!result) {
+            return res.status(404).send({message: "Product not found"})
+        }
+        return res.status(200).send(result);
+
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
 
 const productController = {
     addToWarehouse,
     deleteProduct,
-    getProducts
+    getProducts,
+    getProduct
 }
 
 export default productController

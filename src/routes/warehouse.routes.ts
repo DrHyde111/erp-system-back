@@ -38,6 +38,9 @@ warehouseRouter.post("/:warehouseId/products/add", productController.addToWareho
 // Get products from warehouse
 warehouseRouter.get("/:warehouseId/products", productController.getProducts)
 
+// Get product from warehouse
+warehouseRouter.get("/:warehouseId/products/:productId", productController.getProduct)
+
 // Delete product
 warehouseRouter.delete("/:warehouseId/products/:productId", productController.deleteProduct)
 
