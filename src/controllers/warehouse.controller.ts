@@ -90,7 +90,7 @@ async function assignOverseer(req: Request, res: Response) {
         }
         warehouse.Overseers = [employee]
         const result = await warehouseRepository.save(warehouse);
-        return res.status(200).send(result)
+        return res.status(200).send({message: "Overseer: " + employee.Email + " assigned.", result})
     } catch (error) {
         // tslint:disable-next-line:no-console
         console.log(error);
@@ -123,7 +123,7 @@ async function unasssignOverseer(req: Request, res: Response) {
 
         const result = await warehouseRepository.save(warehouse);
 
-        return res.status(200).send(result)
+        return res.status(200).send({message: "Overseer removed"})
     } catch (error) {
         // tslint:disable-next-line:no-console
         console.log(error);
