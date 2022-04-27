@@ -45,9 +45,36 @@ async function deleteProduct(req: Request, res: Response) {
     }
 }
 
+async function getProducts(req: Request, res: Response) {
+    try {
+        const connection = await getConnection();
+        const productRepository = connection.getRepository(Product)
+        const warehouseRepository = connection.getRepository(Warehouse)
+
+        const warehouse = await warehouseRepository.findOne({id: parseInt(req.params.warehouseId, 10)})
+
+        if (warehouse === undefined) {
+            return res.status(404).send({message: "Warehouse doesnt exist"})
+        }
+
+        const result = await productRepository.find({Warehouse: warehouse})
+        if (result.length === 0) {
+            return res.status(404).send({message: "Warehouse is empty"})
+        }
+        return res.status(200).send(result);
+
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
+
 const productController = {
     addToWarehouse,
-    deleteProduct
+    deleteProduct,
+    getProducts
 }
 
 export default productController
