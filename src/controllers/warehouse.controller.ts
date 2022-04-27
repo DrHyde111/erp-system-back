@@ -88,7 +88,7 @@ async function assignOverseer(req: Request, res: Response) {
         if (warehouse === undefined) {
             return res.status(404).send({message: "Warehouse not found"})
         }
-        warehouse.Overseers = [employee]
+        warehouse.Overseers = [...warehouse.Overseers, employee]
         const result = await warehouseRepository.save(warehouse);
         return res.status(200).send({message: "Overseer: " + employee.Email + " assigned.", result})
     } catch (error) {
