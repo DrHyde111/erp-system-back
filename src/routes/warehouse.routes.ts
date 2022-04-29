@@ -14,6 +14,9 @@ warehouseRouter.get("/:warehouseId", warehouseController.getById)
 // Retrive all warehouses
 warehouseRouter.get("/", warehouseController.getAll)
 
+// Retrive all warehouses
+warehouseRouter.post("/overseer/:employeeId", warehouseController.getOverseed)
+
 // Update warehouse by id
 warehouseRouter.post("/:warehouseId", warehouseController.update)
 

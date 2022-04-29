@@ -49,6 +49,31 @@ async function getAll(req: Request, res: Response) {
     }
 }
 
+async function getOverseed(req: Request, res: Response) {
+    try {
+        const connection = await getConnection()
+        const warehouseRepository = connection.getRepository(Warehouse)
+        const employeeRepository = connection.getRepository(Employee)
+
+        const employee = await employeeRepository.findOne({id: parseInt(req.params.employeeId, 10)})
+
+        if (!employee) {
+            return res.status(404).send({message: "Employee doesn't exist."})
+        }
+
+        const warehouse = await employee.Oversees
+        // tslint:disable-next-line:no-console
+        console.log(warehouse)
+
+        return res.status(200).send(warehouse);
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
+
 async function update(req: Request, res: Response) {
     try {
         const connection = await getConnection()
@@ -140,7 +165,8 @@ const warehouseController = {
     deleteById,
     assignOverseer,
     getOverseers,
-    unasssignOverseer
+    unasssignOverseer,
+    getOverseed
 
 }
 

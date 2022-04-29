@@ -41,7 +41,7 @@ export class Employee {
     @OneToMany(() => Remarks, attendanceRemarks => attendanceRemarks.Creator, {cascade: true, onDelete: "CASCADE"})
     CreatedRemarks: Remarks[];
 
-    @ManyToMany(() => Warehouse, warehouse => warehouse.Overseers)
-    Oversees: Warehouse[]
+    @ManyToMany(() => Warehouse, warehouse => warehouse.Overseers, {onDelete: "CASCADE"})
+    Oversees: Promise<Warehouse[]>
 
 }
