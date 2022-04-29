@@ -41,6 +41,9 @@ warehouseRouter.get("/:warehouseId/products", productController.getProducts)
 // Get product from warehouse
 warehouseRouter.get("/:warehouseId/products/:productId", productController.getProduct)
 
+// Move product to another warehouse
+warehouseRouter.post("/:warehouseId/products/:productId/move/:destinationId", productController.moveProduct)
+
 // Delete product
 warehouseRouter.delete("/:warehouseId/products/:productId", productController.deleteProduct)
 
