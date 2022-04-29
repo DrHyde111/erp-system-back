@@ -152,11 +152,11 @@ async function editProduct(req: Request, res: Response) {
         const connection = await getConnection()
         const productRepository = connection.getRepository(Product)
         const results = await productRepository.update({id: parseInt(req.params.productId, 10)}, req.body);
-        return res.status(200).send(results);
+        return res.status(200).send({status: 0, message: "Edit completed", product: results});
     } catch (e) {
         // tslint:disable-next-line:no-console
         console.log(e);
-        return res.status(500).send({message: "Error"})
+        return res.status(500).send({status: 1, message: "Error"})
     }
 }
 
