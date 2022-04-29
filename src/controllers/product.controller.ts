@@ -2,6 +2,8 @@ import {Request, Response} from "express";
 import {getConnection} from "typeorm";
 import {Product} from "../entity/product";
 import {Warehouse} from "../entity/warehouse";
+import bcrypt from "bcrypt";
+import {Employee} from "../entity/employee";
 
 async function addToWarehouse(req: Request, res: Response) {
     try {
@@ -145,13 +147,27 @@ async function moveProduct(req: Request, res: Response) {
     }
 }
 
+async function editProduct(req: Request, res: Response) {
+    try {
+        const connection = await getConnection()
+        const productRepository = connection.getRepository(Product)
+        const results = await productRepository.update({id: parseInt(req.params.productId, 10)}, req.body);
+        return res.status(200).send(results);
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+        return res.status(500).send({message: "Error"})
+    }
+}
+
 
 const productController = {
     addToWarehouse,
     deleteProduct,
     getProducts,
     getProduct,
-    moveProduct
+    moveProduct,
+    editProduct
 }
 
 export default productController
